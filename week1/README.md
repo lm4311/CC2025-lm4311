@@ -1,5 +1,7 @@
 # Week 1 notes
 
+---
+
 > ## *“As a result, instead of optimizing our machines for humanity—or even the benefit of some particular group—we are optimizing humans for machinery.”* (Rushkoff, p. 15)
 
 I was particularly interested in this line because it turns the relationship we have with technology. Instead of the tools serving us, we are bending ourselves to serve the tools. I agree with this point of concern that in the absence of understanding programming, we are in danger of tailoring our thought processes and workflows to existing packaged software. For the case of learning programming, we design the system and innovate new technologies and installations instead of accepting existing software that has little headroom for improvement.
@@ -11,3 +13,5 @@ I find this interesting for the reason it highlights a paradox that computers ar
 > ## *“We do not know how to program our computers, nor do we care. We spend much more time and energy trying to figure out how to use them to program one another instead.”* (Douglas Rushkoff, p. 18)
 
 This quote stands out to me since I do not agree with this idea as creativity blossoms even in absence of computer programming. The use of computer becomes something more than just coding when an artist starts dabbling with digital tools in visual art, music, and storytelling. Using computers at even the most elementary level fosters new ways of human expression. Thus, not caring about programming is not an indicator of disengagement; rather, it is a sign that one is more concerned with being creative than being entangled in the intricate workings of the system.
+
+---
