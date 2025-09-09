@@ -59,3 +59,5 @@ this is a new line.
 To start a new paragraph, leave an empty line between two lines of text.
 
 This is a new paragraph.
+
+“As a result, instead of optimizing our machines for humanity—or even the benefit of some particular group—we are optimizing humans for machinery.” (Rushkoff, p. 15)
