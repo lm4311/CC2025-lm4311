@@ -66,4 +66,4 @@ I was particularly interested in this line because it turns the relationship we 
 
 > ## *“Computers and networks do more than usurp the value of human thought. They not only copy our intellectual processes—our repeatable programs—but they also discourage our more complex processes—our higher order cognition, contemplation, innovation, and meaning making.”* (Rushkoff, p. 17)
 
-I
+I find this interesting for the reason it highlights a paradox that computers are powerful but they tend to discourage deep, reflective thinking. I agree that if we are dependent on tools that are constructed already, we will lose the willingness to work on difficult and important tasks. Learning how to code is a great example that helps push back this trend. Instead of using tools and relying on the many programmed automatic features and ultimatelly oversimplifying the work, we undergo the mental work creation and ultimately innovate, exercising the very higher order thinking Rushkoff warns we might lose.
