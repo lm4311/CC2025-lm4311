@@ -1,4 +1,5 @@
-let shapeOrigin = 600; // origin of the shape pattern
+let shapeOriginX = window.innerWidth / 2; // X-coordinate origin of the shape pattern
+let shapeOriginY = window.innerHeight / 2; // Y-coordinate origin of the shape pattern
 let quadOffset = 270; // equal length offset for quad
 
 function setup() { // Setting up the canvas, background color, strokeweight, and fill color
@@ -10,16 +11,16 @@ function setup() { // Setting up the canvas, background color, strokeweight, and
 
 function draw() { // Using several different shapes to form a complete shape pattern
   rectMode(CENTER); // Setting the rectangle align in the middle
-  ellipse(shapeOrigin, shapeOrigin, 800) // most outer circle
-  rect(shapeOrigin, shapeOrigin, 555); // outer rectangle
-  quad(shapeOrigin - quadOffset, shapeOrigin, shapeOrigin, shapeOrigin - quadOffset, shapeOrigin + quadOffset, shapeOrigin, shapeOrigin, shapeOrigin + quadOffset) // diamond shape
-  rect(shapeOrigin, shapeOrigin, 355, 160); // inner rectangle
-  ellipse(shapeOrigin, shapeOrigin, 100) // inner circle
-  triangle(shapeOrigin, shapeOrigin - 40, shapeOrigin + 30, shapeOrigin + 30, shapeOrigin - 30, shapeOrigin + 30);
+  ellipse(shapeOriginX, shapeOriginY, 800) // most outer circle
+  rect(shapeOriginX, shapeOriginY, 555); // outer rectangle
+  quad(shapeOriginX - quadOffset, shapeOriginY, shapeOriginX, shapeOriginY - quadOffset, shapeOriginX + quadOffset, shapeOriginY, shapeOriginX, shapeOriginY + quadOffset) // diamond shape
+  rect(shapeOriginX, shapeOriginY, 355, 160); // inner rectangle
+  ellipse(shapeOriginX, shapeOriginY, 100) // inner circle
+  triangle(shapeOriginX, shapeOriginY - 40, shapeOriginX + 30, shapeOriginY + 30, shapeOriginX - 30, shapeOriginY + 30);
   // Drawing lines that connect between the rectangle and the most outer circle
-  line(shapeOrigin, shapeOrigin - 395, shapeOrigin, shapeOrigin - 283) // top line
-  line(shapeOrigin - 395, shapeOrigin, shapeOrigin - 283, shapeOrigin) // left line
-  line(shapeOrigin + 395, shapeOrigin, shapeOrigin + 283, shapeOrigin) // right line
-  line(shapeOrigin, shapeOrigin + 395, shapeOrigin, shapeOrigin + 283) // bottom line
+  line(shapeOriginX, shapeOriginY - 395, shapeOriginX, shapeOriginY - 283) // top line
+  line(shapeOriginX - 395, shapeOriginY, shapeOriginX - 283, shapeOriginY) // left line
+  line(shapeOriginX + 395, shapeOriginY, shapeOriginX + 283, shapeOriginY) // right line
+  line(shapeOriginX, shapeOriginY + 395, shapeOriginX, shapeOriginY + 283) // bottom line
   
 }
