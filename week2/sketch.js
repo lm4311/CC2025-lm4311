@@ -2,7 +2,7 @@ let shapeOrigin = 600; // origin of the shape pattern
 let quadOffset = 270; // equal length offset for quad
 
 function setup() { // Setting up the canvas, background color, strokeweight, and fill color
-  createCanvas(1200, 1200);
+  createCanvas(windowWidth, windowHeight);
   background(0);
   strokeWeight(8);
   fill(255, 255, 255);
