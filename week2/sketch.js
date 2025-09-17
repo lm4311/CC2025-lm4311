@@ -22,5 +22,4 @@ function draw() { // Using several different shapes to form a complete shape pat
   line(shapeOriginX - 395, shapeOriginY, shapeOriginX - 283, shapeOriginY) // left line
   line(shapeOriginX + 395, shapeOriginY, shapeOriginX + 283, shapeOriginY) // right line
   line(shapeOriginX, shapeOriginY + 395, shapeOriginX, shapeOriginY + 283) // bottom line
-  
 }
