@@ -30,6 +30,7 @@ function draw() {
   vertex(200, 700);
   endShape(CLOSE);
 
-  arc(width/2, height/2, 100, 100, 0, PI);
-
+  noStroke();
+  arc(width/2, height/3.1, 50, 50, radians(0), radians(180), PIE);
+  console.log(mouseX);
 }
