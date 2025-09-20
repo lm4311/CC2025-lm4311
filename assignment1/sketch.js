@@ -149,7 +149,7 @@ function draw() {
 
   // Continue drawing for the third layer objects
   fill(earthcolor3);
-  triangle(145, 550, 200, 600, 100, 600);
+  triangle(145, 550, 200, 600, 100, 600); // Using triangle function to draw triangle using three vertex points
 
   noFill();
   strokeWeight(15);
