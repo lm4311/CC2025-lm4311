@@ -1,6 +1,8 @@
 // Delcare virtual camvas size
 const canvasWidth = 1000;
 const canvasHeight = 750;
+
+// Declare line spacing for easy modification
 let lineSpacing = 22;
 
 //Color Palette #1
