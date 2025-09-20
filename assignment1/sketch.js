@@ -1,13 +1,16 @@
+// Delcare virtual camvas size
 const canvasWidth = 1000;
 const canvasHeight = 750;
 let lineSpacing = 22;
 
+//Color Palette #1
 let earthcolor1 = "#D9B44A";
 let earthcolor2 = "#A67C2D";
 let earthcolor3 = "#6B4F2A";
 let earthcolor4 = "rgba(0, 0, 0, 0.7)";
 let earthcolor5 = "rgba(0, 0, 0, 0.5)";
 
+//Color Palette #2
 let waterColor1 = "#A7C6ED";
 let waterColor2 = "#6B9AC4";
 let waterColor3 = "#4A8D9D";     
@@ -15,18 +18,19 @@ let waterColor4 = "#2B6B7A";
 let waterColor5 = "#1D4D5A";
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
-  background(255);
+  createCanvas(windowWidth, windowHeight); // Creating Canvas based on window width and window height
+  background(255); // Setting background color to white
   
 }
 
 function draw() {
-  console.log(mouseX + " " + mouseY);
-  const scaleFactor = min(width / canvasWidth, height / canvasHeight );
-  scale(scaleFactor);
-  noStroke();
+  console.log(mouseX + " " + mouseY); // Debugging mouseX and mouseY location to help with drawing
+  const scaleFactor = min(width / canvasWidth, height / canvasHeight ); // Delcaring scaling factor variable that takes account of both window width and height along with virtual canvas width and height
+  scale(scaleFactor); // Scaling the entire canvas by either window width divided by virtual canvas width or window height divided by virtual canvas height
+  noStroke(); // Eliminate stroke
 
-  //base shapes
+  // Base layer for background painted with color palette #1
+  // Shapes are drawn with rectangle function and fill function
   fill(waterColor3);
   rect(0, 0, 230, 150);
   fill(waterColor2);
@@ -54,7 +58,7 @@ function draw() {
   fill(waterColor5);
   rect(910, 380, 90, 370);
 
-  //layer 2 shapes
+  // Secondary layer added on top of the base layer using smaller rectangles and polygons, still painted with color palette #1 but with deeper color
   fill(waterColor2);
   rect(0, 0, 145, 60);
   fill(waterColor5);
@@ -67,8 +71,16 @@ function draw() {
   rect(305, 225, 75, 155);
   fill(waterColor5);
   rect(305, 150, 75);
+  fill(waterColor3);
+  rect(140, 680, 90, 70);
+  fill(waterColor4);
+  rect(380, 680, 265, 70);
+  fill(waterColor2);
+  rect(645, 640, 265, 110);
+  fill(waterColor3);
+  rect(910, 470, 55, 215);
   
-  //begin shape
+  // Using begin shape & vertex & end shape & fill function to draw polygon for secondary layer
   fill(waterColor3);
   beginShape();
   vertex(230, 225);
@@ -89,31 +101,22 @@ function draw() {
   vertex(140, 750);
   vertex(0, 750);
   vertex(0, 300);
-
   endShape(CLOSE);
 
-  //layer 2 shapes
-  fill(waterColor3);
-  rect(140, 680, 90, 70);
-  fill(waterColor4);
-  rect(380, 680, 265, 70);
-  fill(waterColor2);
-  rect(645, 640, 265, 110);
-  fill(waterColor3);
-  rect(910, 470, 55, 215);
-
-  // layer 3 shape pattern
+  // Third layer added on top of the second layer to draw surface objects that stand out from the background using color palette #2
+  // Drawing arc using thick stroke with square cap and no filled color
   noFill();
   strokeWeight(15);
   stroke(earthcolor3);
   strokeCap(SQUARE);
   arc(145, 200, 125, 80, 0, PI);
 
+  // Firsr reset the stroke to none and draw the triangle by providing three vertex points
   noStroke();
   fill(earthcolor5);
   triangle(145, 245, 125, 380, 165, 380);
 
-  //begin shape
+  // Using begin shape & vertex & end shape function to draw polygons
   fill(earthcolor1);
   beginShape();
   vertex(125, 380);
@@ -144,7 +147,7 @@ function draw() {
 
 
 
-  // layer 3 shape pattern
+  // Continue drawing for the third layer objects
   fill(earthcolor3);
   triangle(145, 550, 200, 600, 100, 600);
 
@@ -155,7 +158,7 @@ function draw() {
 
   noStroke();
   fill(earthcolor1);
-  quad(400, 150, 450, 115, 500, 150, 450, 185);
+  quad(400, 150, 450, 115, 500, 150, 450, 185); // Drawing the diamond shape using quad function by providing four vertex points
   fill(earthcolor3);
   triangle(450, 115, 500, 150, 450, 150);
   triangle(400, 150, 450, 185, 450, 150);
@@ -186,9 +189,9 @@ function draw() {
   fill(earthcolor3);
   triangle(770, 515, 770, 610, 840, 610);
 
-  //layer 4 extra detail
+  // Fourth layer added on top of the third layer for extra fine detail such as polygons and lines drawn on top of certain shapes
 
-  //begin shape lines
+  // Using begin shape function to mimic eight bold irregular lines that connect both sides of the polygon shape
   fill(earthcolor2);
   beginShape();
   vertex(855, 83);
@@ -246,23 +249,24 @@ function draw() {
   vertex(858, 333);
   endShape(CLOSE);
 
-  //lines
+  // Using line function to draw eleven thin lines that connect top and bottom of a rectangle
   stroke(waterColor3);
-  strokeWeight(4)
-  line(670, 640, 670, 750);
-  line(670 + lineSpacing, 640, 670 + lineSpacing, 750);
-  line(670 + lineSpacing * 2, 640, 670 + lineSpacing * 2, 750);
-  line(670 + lineSpacing * 3, 640, 670 + lineSpacing * 3, 750);
+  strokeWeight(4) // Setting up a thin stroke
+  line(670, 640, 670, 750); // Draw the first vertical line
+  line(670 + lineSpacing, 640, 670 + lineSpacing, 750); // Second vertical line added with one line spacing
+  line(670 + lineSpacing * 2, 640, 670 + lineSpacing * 2, 750); // Third vertical line added with double the line spacing
+  line(670 + lineSpacing * 3, 640, 670 + lineSpacing * 3, 750); // ...
   line(670 + lineSpacing * 4, 640, 670 + lineSpacing * 4, 750);
   line(670 + lineSpacing * 5, 640, 670 + lineSpacing * 5, 750);
   line(670 + lineSpacing * 6, 640, 670 + lineSpacing * 6, 750);
   line(670 + lineSpacing * 7, 640, 670 + lineSpacing * 7, 750);
   line(670 + lineSpacing * 8, 640, 670 + lineSpacing * 8, 750);
   line(670 + lineSpacing * 9, 640, 670 + lineSpacing * 9, 750);
-  line(670 + lineSpacing * 10, 640, 670 + lineSpacing * 10, 750);
+  line(670 + lineSpacing * 10, 640, 670 + lineSpacing * 10, 750); // Up to ten times the line spacing for the eleventh line
   
 }
 
+// Calling the windowResized function every frame to dynamically adjust the virtual canvas scale based on current window width and height
 function windowResized(){
   resizeCanvas(windowWidth, windowHeight);
 }
