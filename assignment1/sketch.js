@@ -111,7 +111,11 @@ function draw() {
   strokeWeight(15);
   stroke(earthcolor3);
   strokeCap(SQUARE);
-  arc(145, 200, 125, 80, 0, PI);
+  arc(145, 200, 125, 80, 0, PI); // Drawing arcs with multiple segments by tweaking values for both arc start and end points
+  stroke(earthcolor4);
+  arc(145, 200, 125, 80, PI / 7, PI / 3.8);
+  arc(145, 200, 125, 80, PI / 2.5, PI / 1.7);
+  arc(145, 200, 125, 80, PI / 1.35, PI / 1.15);
 
   // Firsr reset the stroke to none and draw the triangle by providing three vertex points
   noStroke();
@@ -153,10 +157,18 @@ function draw() {
   fill(earthcolor3);
   triangle(145, 550, 200, 600, 100, 600); // Using triangle function to draw triangle using three vertex points
 
-  noFill();
+  noFill(); // Drawing arcs with multiple segments by tweaking values for both arc start and end points
   strokeWeight(15);
   stroke(earthcolor3);
   arc(310, 530, 170, 90, 0, PI);
+  stroke(earthcolor4);
+  arc(310, 530, 170, 90, 0, PI / 12);
+  arc(310, 530, 170, 90, PI / 7, PI / 4.5);
+  arc(310, 530, 170, 90, PI / 3.5, PI / 2.5);
+  arc(310, 530, 170, 90, PI / 1.8, PI / 1.45);
+  arc(310, 530, 170, 90, PI / 1.3, PI / 1.18);
+  arc(310, 530, 170, 90, PI / 1.09, PI);
+
 
   noStroke();
   fill(earthcolor1);
