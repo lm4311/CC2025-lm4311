@@ -17,10 +17,12 @@ function draw() {
     fill("pink");
   } else if (mouseX < width / 2 && mouseY < height / 2){
     fill("orange");
-  }
-  
-  else{
+  } else{
     fill("yellow");
+  }
+
+  if (mouseIsPressed == true){
+    fill("red");
   }
   translate(width / 2, height / 2);
   let angle;
