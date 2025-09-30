@@ -21,10 +21,6 @@ function draw() {
       rotation = map(y, 50, height - 50, 0, PI);
       rotate(rotation);
 
-      let randomAmount = 0.075;
-      let randomXDisp;
-      let randomYDisp;
-
       strokeWeight(3);
       fill("yellow");
       circle(0, 0, 100);
