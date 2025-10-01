@@ -3,7 +3,7 @@ let tileSize = 32; // size for each tile
 let dScale = 1; // scale factor for the arc diameter
 let isDragging = false; // boolean for mouse drag
 let isPressed = false; // boolean for mouse press
-let colorA, colorB , direction; // arc stroke color 
+let colorA, colorB; // arc stroke color 
 let colorController; // control arc stroke color dynamically
 let bgColorControllerR; // controls background color R value
 let bgColorControllerG; // controls background color G value
