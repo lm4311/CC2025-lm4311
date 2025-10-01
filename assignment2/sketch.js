@@ -11,7 +11,6 @@ let bgColorControllerB; // controls background color B value
 
 function setup() {
   createCanvas(832, 640);
-  randomSeed(5); // choose a specific pattern for a defined look from random | https://p5js.org/reference/p5/randomSeed/
   noLoop(); // prevent redrawing all time
   colorMode(RGB); // initialize color mode to RGB
   colorA = color("#66ccff"); // set up first color for arc stroke
@@ -24,6 +23,7 @@ function draw() {
 
   // setting background color dynamically based on user mouseX and mouseY input when user is dragging or pressing mouse
   if (isDragging == true || isPressed == true){
+    // here I used constrain function because I found out that map function sometimes can exceed the limit when mouse goes out from the canvas
     bgColorControllerR = constrain(map(mouseX, 0, width, 0, 40), 0, 40); // constrain mapped value so that R value stays within bound | https://p5js.org/examples/calculating-values-constrain/
     bgColorControllerG = constrain(map(mouseY, 0, height, 30, 80), 30, 80);
     bgColorControllerB = constrain(map(mouseY, 0, height, 100, 160), 100, 160);
@@ -34,24 +34,27 @@ function draw() {
   }
 
   // initializing number of columns and rows
-  const cols = ceil(width / tileSize); // divide the canvas width by each desired tile size to get the resulting column amount. use ceil function to always round up to an integer | https://p5js.org/reference/p5/ceil/
-  const rows = ceil(height / tileSize); // same logic applies
+  // here I decided to use ceil function is because I wanted an integer to use in the nested for loop
+  let cols = ceil(width / tileSize); // divide the canvas width by each desired tile size to get the resulting column amount. use ceil function to always round up to an integer | https://p5js.org/reference/p5/ceil/
+  let rows = ceil(height / tileSize); // same logic applies
 
   // create repeating pattern across whole canvas but with increasingly chaotic pattern along Y axis
+  // this first for loop creates patterns across Y-axis
   for (let j = 0; j < rows; j++) {
 
     // chaos goes 0 to 1 from top row to bottom row
-    const t = map(j, 0, rows - 1, 0, 1);
-
+    let t = map(j, 0, rows - 1, 0, 1); // this is the variable I created for manupulating chaos strength based on row numbers
+    
+    // this second for loop creates patterns across X-axis
     for (let i = 0; i < cols; i++) {
       // define base position (center) for each tile
-      const cx = i * tileSize + tileSize * 0.5; // space tiles out evenly by a tile size each time with a tile radius offset
-      const cy = j * tileSize + tileSize * 0.5; // same logic applies
+      let cx = i * tileSize + tileSize * 0.5; // space tiles out evenly by a tile size each time with a tile radius offset
+      let cy = j * tileSize + tileSize * 0.5; // same logic applies
 
       // chaos controls
-      const jitter = t * tileSize * 0.4; // create jitter effect by shifting position with t
-      const rot    = t * random(-PI, PI); // random rotation grows with t between -PI and PI | https://p5js.org/reference/p5/random/
-      const span   = map(t, 0, 1, 0, PI / 2); // arc lengthens with t
+      let jitter = t * tileSize * 0.4; // create jitter effect by shifting position with t
+      let rot    = t * random(-PI, PI); // random rotation grows with t between -PI and PI | https://p5js.org/reference/p5/random/
+      let span   = map(t, 0, 1, 0, PI / 2); // arc lengthens with t
 
       // skip more tiles near the bottom
       if (random() > t * 0.15) { // random() range between 0 and 1
@@ -66,7 +69,7 @@ function draw() {
           } else {
             colorController = map(mouseX, 0, width, 1, 0, true); // odd tiles go from 1 to 1
           }
-          const dynamicColor = lerpColor(colorA, colorB, colorController); // lerp color in opposite for the closest two arcs by alpha (colorController) | https://p5js.org/reference/p5/lerpColor/
+          let dynamicColor = lerpColor(colorA, colorB, colorController); // lerp color in opposite for the closest two arcs by alpha (colorController) | https://p5js.org/reference/p5/lerpColor/
           stroke(dynamicColor); 
         } else {
           // reset to default arc stroke color when release
@@ -119,7 +122,6 @@ function mouseDragged() {
 function mouseReleased() {
   // stop looping and reset to default pattern with random seed 5
   noLoop();
-  randomSeed(5);
   tileSize = 32; // reset tile size to default 32
   dScale = 1; // reset arc diameter scale factor to default 1
   isDragging = false; // reset isDragging to default false
