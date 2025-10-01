@@ -23,7 +23,8 @@ function draw() {
 
   // setting background color dynamically based on user mouseX and mouseY input when user is dragging or pressing mouse
   if (isDragging == true || isPressed == true){
-    // here I used constrain function because I found out that map function sometimes can exceed the limit when mouse goes out from the canvas
+    // here I used constrain function because I found out that map function sometimes can exceed the limit when mouse goes out of the canvas. So I find a function on P5.JS to make sure none of the values will exceed the bond created in map().
+    // these variables below will respond to users mouse input to dynamically change values to generate different colors when used together in background().
     bgColorControllerR = constrain(map(mouseX, 0, width, 0, 40), 0, 40); // constrain mapped value so that R value stays within bound | https://p5js.org/examples/calculating-values-constrain/
     bgColorControllerG = constrain(map(mouseY, 0, height, 30, 80), 30, 80);
     bgColorControllerB = constrain(map(mouseY, 0, height, 100, 160), 100, 160);
@@ -58,6 +59,7 @@ function draw() {
       let span   = map(t, 0, 1, 0, PI / 2); // arc lengthens with t
 
       // this if statement is used to skip random tiles across the canvas but more near the bottom to create a more chaotic feeling
+      // because t increases at rows increase, there will be a lower chance for the random number between 0 and 1 to exceed t * 0.15, so some tiles near the bottom won't be drawn since the functions won't be executed
       if (random() > t * 0.15) { // random() range between 0 and 1
 
         push(); // add transformations separately for each tile
