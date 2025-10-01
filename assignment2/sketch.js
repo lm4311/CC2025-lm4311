@@ -48,27 +48,32 @@ function draw() {
     // this second for loop creates patterns across X-axis
     for (let i = 0; i < cols; i++) {
       // define base position (center) for each tile
-      let cx = i * tileSize + tileSize * 0.5; // space tiles out evenly by a tile size each time with a tile radius offset
-      let cy = j * tileSize + tileSize * 0.5; // same logic applies
+      let centerX = i * tileSize + tileSize * 0.5; // space tiles out evenly by a tile size each time with a tile radius offset
+      let centerY = j * tileSize + tileSize * 0.5; // same logic applies
 
-      // chaos controls
+      // here I created three variables to manipulate how chaotic I want my pattern to be. I used t in each variable to make sure each of these variables is related to the chaos factor
+      // since t increases along Y-axis, my pattern will be much more chaotic in transformations down the bottom
       let jitter = t * tileSize * 0.4; // create jitter effect by shifting position with t
       let rot    = t * random(-PI, PI); // random rotation grows with t between -PI and PI | https://p5js.org/reference/p5/random/
       let span   = map(t, 0, 1, 0, PI / 2); // arc lengthens with t
 
-      // skip more tiles near the bottom
+      // this if statement is used to skip random tiles across the canvas but more near the bottom to create a more chaotic feeling
       if (random() > t * 0.15) { // random() range between 0 and 1
 
         push(); // add transformations separately for each tile
 
-        // change color dynamically for each arc when user drag or press mouse
+        // this if statement is used to change color dynamically for each arc when user drag or press mouse
         if (isDragging == true || isPressed == true){
-          // check for odd and even tiles
-          if ((i + j) % 2 === 0) {
+          // I wanted to add some more diversity so I added this conditional statement by check for odd and even tiles using the remainder opertation. I learned this operation in my first year computer science class and it's a common way to find out the odd and even numbers
+          // If the number can be divided by 2, then it has to be even, and vice versa
+          if ((i + j) % 2 == 0) {
             colorController = map(mouseX, 0, width, 0, 1, true); // even tiles go from 0 to 1
           } else {
-            colorController = map(mouseX, 0, width, 1, 0, true); // odd tiles go from 1 to 1
+            colorController = map(mouseX, 0, width, 1, 0, true); // odd tiles go from 1 to 0
           }
+          // at this point I wanted to do some gradual change for the arc color responding to user mouse input, so I researched a bit and decided to try using lerpColor function that I found on P5.JS and gave it a try
+          // lerpColor takes in two solid colors and lerp linearly from one to another based on the alpha that is the third parameter. When color controller (alpha) is 0, the color will be A. When alpha is 1, the color will be B.
+          // lerpColor work both ways and interpolate the colors between colorA and colorB
           let dynamicColor = lerpColor(colorA, colorB, colorController); // lerp color in opposite for the closest two arcs by alpha (colorController) | https://p5js.org/reference/p5/lerpColor/
           stroke(dynamicColor); 
         } else {
@@ -77,12 +82,12 @@ function draw() {
         } 
 
         // translate each tile for even spacing and jitter randomness 
-        translate(cx + random(-jitter, jitter), cy + random(-jitter, jitter) - 25);
+        translate(centerX + random(-jitter, jitter), centerY + random(-jitter, jitter) - 25);
 
         // alternate orientation for tiles
         let additiveRot;
         // check for even and odd tiles
-        if ((i + j) % 2 === 0) {
+        if ((i + j) % 2 == 0) {
           additiveRot = 0; // even tiles remain the same base rotation
         } else {
           additiveRot = radians(270); // odd tiles rotate 270 degrees
