@@ -65,7 +65,7 @@ function draw() {
         // this if statement is used to change color dynamically for each arc when user drag or press mouse
         if (isDragging == true || isPressed == true){
           // I wanted to add some more diversity so I added this conditional statement by check for odd and even tiles using the remainder opertation. I learned this operation in my first year computer science class and it's a common way to find out the odd and even numbers
-          // If the number can be divided by 2, then it has to be even, and vice versa
+          // If the number can be divided by 2, then it has to be even, and vice versa | https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Remainder
           if ((i + j) % 2 == 0) {
             colorController = map(mouseX, 0, width, 0, 1, true); // even tiles go from 0 to 1
           } else {
@@ -84,13 +84,14 @@ function draw() {
         // translate each tile for even spacing and jitter randomness 
         translate(centerX + random(-jitter, jitter), centerY + random(-jitter, jitter) - 25);
 
+        // here I chose an alternative approach from drawing two opposite arcs for each draw run. I drew all of the arcs all at the same direction but will change the orientation for every other tile
         // alternate orientation for tiles
         let additiveRot;
-        // check for even and odd tiles
+        // here I still use the remainder operator to check for even and odd tiles
         if ((i + j) % 2 == 0) {
           additiveRot = 0; // even tiles remain the same base rotation
         } else {
-          additiveRot = radians(270); // odd tiles rotate 270 degrees
+          additiveRot = radians(270); // odd tiles rotate 270 degrees so every two nearby arcs will back facing each other
         }
 
         rotate(additiveRot + rot); // compute additional rotation added to the base rotation
@@ -107,25 +108,29 @@ function draw() {
   }
 }
 
-// execute when moues pressed
+//I decided to use mousePressed function to let the users interact with the canvas
+// execute when moues pressed | https://p5js.org/reference/p5/mousePressed/
 function mousePressed() {
   // loop to constantly redraw to show simulated chaos 
   loop();
   // dynamically change arc diameter scale factor based on user mouseX input and restrict between 0.75 and 1.25
+  // here again, I used the constrain function to avoid values exceeding 0.75 and 1.25 when user mouse is outside of the canvas
   dScale = constrain(map(mouseX, 0, width, 0.75, 1.25), 0.75, 1.25);
   isPressed = true;
 }
 
-// execute when mouse dragged
+// I chose to use mouseDragged function is because I wanted the user experience to be smoother by allower user sliding their mouse across the canvas and triggering dynamic change in arcs (animation)
+// execute when mouse dragged | https://p5js.org/reference/p5/mouseDragged/
 function mouseDragged() {
   // dynamically change arc diameter scale factor based on user mouseX input and restrict between 0.75 and 1.25
   dScale = constrain(map(mouseX, 0, width, 0.75, 1.25), 0.75, 1.25);
   isDragging = true;
 }
 
-// execute when mouse released
+// I chose to use mouseReleased function is because I wanted my canvas to return to default when users stop interacting with canvas. This way encourages users to interact with the canvas to explore animated pattern
+// execute when mouse released | https://p5js.org/reference/p5/mouseReleased/
 function mouseReleased() {
-  // stop looping and reset to default pattern with random seed 5
+  // stop looping and reset to default
   noLoop();
   tileSize = 32; // reset tile size to default 32
   dScale = 1; // reset arc diameter scale factor to default 1
