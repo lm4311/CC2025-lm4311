@@ -1,5 +1,5 @@
 // I chose to do a tree ring digital clock because it represents the passage of time through the increase of growth rings
-// I think this is a great idea because it captures the idea of time but also has a lot of room for me use my imagination
+// I think this is a great idea because it captures the idea of time but also has a lot of room for me to use my imagination
 // Even though the tree ring digital clock does not show the exact time, it reveals the passage of time in years, months, days, and hours
 // The growth rings here do not exactly follow natural rules as it will be a little abstract and creative. 
 // Each thin ring represents one month and each thicker year ring represents one year, meaning that each year will consist of 12 rings (1 thick ring and 11 thin rings)
