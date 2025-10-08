@@ -34,7 +34,7 @@ let barkRectCount = 64; // set the number of rectangular bark pieces for easy ad
 
 function setup() {
   createCanvas(840, 840);
-  angleMode(RADIANS);
+  angleMode(RADIANS); // I'm more comfortable using radians when working with circles, and there will be a lot involving angles, so I decided to change the angle mode to radians. | https://p5js.org/reference/p5/angleMode/
   noLoop(); // I dont want redraw occuring every frame at least for now
   centerX = width / 2; // center the x-coordinate
   centerY = height / 2; // center the y-coordiante so all the shapes stay in middle
@@ -78,7 +78,7 @@ function draw() {
 
       // here I set multiple variables to use the m variable from foor loop to gradually adjust the tree rings based on the number of months
       let alpha = m / (monthsPerYear - 1); // I created this alpha variable to be used in lerpColor() function as it holds the progress for lerping from a to b. Because there are m is between 0 and 11 inclusively, so to ensure the alpha stays between 0 and 1, the max value for denominator should be 11, which is monthsPerYear - 1
-      let ringColor = lerpColor(lightWood, darkWood, alpha); // Here I set a variable to receive the value for lerpColor(). It will lerp from lightwood gradually to darkwood color for each one year cycle. The reason why I do this is because each year ring will grow from shallow to dark due to seasonal factor. During Spring and Summer, the tree grows fast, and druing Autumn and Winter, the tree grows slowly resulting in a darker color
+      let ringColor = lerpColor(lightWood, darkWood, alpha); // Here I set a variable to receive the value for lerpColor(). It will lerp from lightwood gradually to darkwood color for each one year cycle. The reason why I do this is because each year ring will grow from shallow to dark due to seasonal factor. During Spring and Summer, the tree grows fast, and druing Autumn and Winter, the tree grows slowly resulting in a darker color | https://p5js.org/reference/p5/lerpColor/
       let ringRadius = yearStartRadius + m * monthRingGap; // I created this variable to store the final value for each month rings. The final radius for each ring consists of a current year ring radius and m number of month ring gap
 
       // get ready for drawing rings
@@ -108,7 +108,7 @@ function draw() {
   fill(barkFill);
 
   // I want an organic pattern of rectangular barks that won't look chaotic. Also, I dont want to draw them out one by one using rect(), so I decided to use for loop because for loop is good at handling repeating tasks.
-  // in this for loop, i loop through all 64 rectangular barks and slightly offset each of them to create this result, where all 64 rectangles circle around the tree bark
+  // in this for loop, I loop through all 64 rectangular barks and slightly offset each of them to create this result, where all 64 rectangles circle around the tree bark
   for (i = 0; i < barkRectCount; i++) {
     // to create this circular placement of rectangles, I used the rotation offset for each rectangle. Because there are 64 of them, each of them will take 1/64 of the 2PI for placement, so that they can evenly space out
     let rotationOffset = (i / barkRectCount) * 2 * PI;
