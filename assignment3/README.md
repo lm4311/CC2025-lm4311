@@ -14,4 +14,4 @@
 > After each full cycle, the tree will change its shape by randomizing the width and height of itsrectangular barks and default tree rings back to 0 becuase it now becomes a new tree
 > This feature will also be implemented next week as it relates to the clock function
 
-> ![image description](./Tree Ring Clock Sketch.png)
+> ![image description](./TreeRingSketch.png)
