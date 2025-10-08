@@ -13,3 +13,5 @@
 > There are four year rings for this tree ring digital clock, meaning that a full animated cycle of time passage will be four years.
 > After each full cycle, the tree will change its shape by randomizing the width and height of itsrectangular barks and default tree rings back to 0 becuase it now becomes a new tree
 > This feature will also be implemented next week as it relates to the clock function
+
+> ![image description](Image/Tree Ring Clock Sketch.png)
