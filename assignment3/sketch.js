@@ -113,7 +113,7 @@ function draw() {
     // to create this circular placement of rectangles, I used the rotation offset for each rectangle. Because there are 64 of them, each of them will take 1/64 of the 2PI for placement, so that they can evenly space out
     let rotationOffset = (i / barkRectCount) * 2 * PI;
     // now the rectangles are perfectly evenly spaced out around the tree bark, but it is not organic. So I decided to add some randomness to their width and height
-    let randomDepth = random(25, 50); // set a random number between 25 and 50 for rectangle height (depth)
+    let randomDepth = random(25, 50); // set a random number between 25 and 50 for rectangle height (depth) | https://p5js.org/reference/p5/random/
     let randomWidth = random(30, 60); // set a random number between 30 and 60 for rectangle width. Now they look pretty organic and real
 
     // add rotation to each rectangle separately
