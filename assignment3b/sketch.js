@@ -177,9 +177,15 @@ function draw() {
         // I chose to use arc instead of ellipse is because I need arc to dynamically adjust the start and end point of each arc span to show time passage
         // this feature will be implemented in next week
         arc(0, 0, ringRadius * 2, ringRadius * 2, 0, secondsProgressPerMinute * TWO_PI); 
-        console.log(secondsProgressPerMinute);
-        if (secondsProgressPerMinute * TWO_PI > TWO_PI){
+        if (secondsProgressPerMinute == 0){
+          console.log("Next Ring");
+          console.log(secondsProgressPerMinute);
+          if(canReset){
+            ringRadii.push(ringRadius);
+            canReset = false;
+          }
           
+          console.log(ringRadii.length);
         }
       }
     }
