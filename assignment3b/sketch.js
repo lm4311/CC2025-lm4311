@@ -179,11 +179,11 @@ function draw() {
         // this feature will be implemented in next week
         arc(0, 0, ringRadius * 2, ringRadius * 2, 0, secondsProgressPerMinute * TWO_PI / (ringIndex == 0 ? 1 : (ringIndex * TWO_PI))); 
         console.log(secondsProgressPerMinute * TWO_PI);
-        if (secondsProgressPerMinute * TWO_PI >= TWO_PI) {
-          ringIndex++;
-          currentMonthRing++;
-        }
       }
+    }
+    if (secondsProgressPerMinute * TWO_PI >= TWO_PI) {
+      ringIndex++;
+      currentMonthRing++;
     }
   }
 
