@@ -42,6 +42,7 @@ let conditionalThreshold = 0;
 let currentMonthRing;
 let currentYearRing;
 let ringRadii = [];
+let ringIndex = 0;
 
 function setup() {
   createCanvas(840, 840);
@@ -133,7 +134,7 @@ function draw() {
     }
   }
 
-  let secondsProgressPerMinute = millis() % 10000 / 10000;
+  let secondsProgressPerMinute = millis() / 10000;
   let secondsProgressPerMinuteOffset = (initialMonthProgress + secondsProgressPerMinute) * TWO_PI;
   stroke(RingColorContainer);
   if (secondsProgressPerMinuteOffset <= TWO_PI - conditionalThreshold) {
@@ -155,7 +156,7 @@ function draw() {
 
       // the second for loop as expected will be responsible for the 12 month ring tracking each year (11 thin rings + 1 thick ring)
       // all tree rings will be drawn inside this for loop
-      for (let m = mContainer; m < (ringRadii.length + initialMonth + 2); m++){
+      for (let m = mContainer; m < currentMonthRing; m++){
 
         // here I set multiple variables to use the m variable from foor loop to gradually adjust the tree rings based on the number of months
         let alpha = m / (monthsPerYear - 1); // I created this alpha variable to be used in lerpColor() function as it holds the progress for lerping from a to b. Because there are m is between 0 and 11 inclusively, so to ensure the alpha stays between 0 and 1, the max value for denominator should be 11, which is monthsPerYear - 1
@@ -176,20 +177,19 @@ function draw() {
         // draw each ring using arc() function by setting the span to 2PI which is 360 degree
         // I chose to use arc instead of ellipse is because I need arc to dynamically adjust the start and end point of each arc span to show time passage
         // this feature will be implemented in next week
-        arc(0, 0, ringRadius * 2, ringRadius * 2, 0, secondsProgressPerMinute * TWO_PI); 
-        if (secondsProgressPerMinute == 0){
-          console.log("Next Ring");
-          console.log(secondsProgressPerMinute);
-          if(canReset){
-            ringRadii.push(ringRadius);
-            canReset = false;
-          }
-          
-          console.log(ringRadii.length);
+        arc(0, 0, ringRadius * 2, ringRadius * 2, 0, secondsProgressPerMinute * TWO_PI / (ringIndex == 0 ? 1 : (ringIndex * TWO_PI))); 
+        console.log(secondsProgressPerMinute * TWO_PI);
+        if (secondsProgressPerMinute * TWO_PI >= TWO_PI) {
+          ringIndex++;
+          currentMonthRing++;
         }
       }
     }
   }
 
   
+}
+
+function Reset() {
+
 }
