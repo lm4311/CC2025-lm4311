@@ -121,7 +121,6 @@ function draw() {
   // becuase each completed ring represents full number of days in a month, the ring arc span can indicate which day of a month we are currently in. If it is 15th of a month, the arc span will be from 0 to PI
   let initialMonthProgress = initialDay / daysPerMonth;
 
-
   // Below I used multiple for loops to display the rings that have been drawn and the rings that are actively being drawn to the canvas through change of arc span
   // I created this for first for loop to draw initial rings based on calendar month and day. These are meant to be static rings since they represent the time that has already past in a year
   // as you can see here, m starts from 0 and stops at the calendar month, meaning that it will display up tp (initial month) number of rings on the canvas
