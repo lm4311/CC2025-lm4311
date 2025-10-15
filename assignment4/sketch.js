@@ -41,7 +41,6 @@ function draw() {
   pepperoniPizza.displayPizza();
 }
 
-
 // I created the class called Pizza and assigned six parameters to the constructor so far so that each instance is able to adjust its own parameter to change their size, toppingCount, xy coordinate, and rotation
 // after creating the constructor parameters, I assign those parameter values to each instance specific parameter so that each of the instance contains their unique parameter values
 // this is the crucial step as it makes everything modular and scalable
@@ -88,7 +87,6 @@ class Pizza {
     // here is also used the push and pop to separate each slice line transformation
     for (let i = 0; i < 6; i ++) {
       let rotationOffset = (i / 6) * TWO_PI;
-
       push();
       rotate(rotationOffset);
       line(0, 0, (this.size * 0.85) / 2, 0)
@@ -112,7 +110,6 @@ class Pizza {
         pop();
       }
     }
-
     pop();
   }
 }
