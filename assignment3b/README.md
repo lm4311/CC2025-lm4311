@@ -1,6 +1,6 @@
 # Assignment 3
 
-> - This week I focused on finishing my tree ring abstract clock by aadding the ring animation and interactions to the original idea.
+> - This week I focused on finishing my tree ring abstract clock by adding the ring animation and interactions to the original idea.
 > Last week it was about the overall appearance of the clock, and this week is about giving the functionality to it so it can respond to time in an unconventional way.
 > This clock starts at the current time based on month() and day(), meaning that it will adjust its growth ring number and length accordingly.
 > For example, if the current month is October and the current day is 15th of October, the clock will have 10 growth rings with another half completed ring at start.
@@ -11,4 +11,4 @@
 > Also, the tree pith color will also change gradually based on customized time passage speed after initialliy anchored the time to the real calendar.
 > Once the tree rings reach to their maximum amount, the tree barks will add another layer on top of itself. I did this to simulate the tree growth once every four year, despite I speed up this process by assigning the time passage rate to a customized speed.
 > After every four years (4 year rings - 48 rings in total), the rings will default back to the calendar time and start again from there.
-> For user convenience, I added a mouse interction so if the user hold their left mouse button, it will speed up the entire time elapsing rate to show the conccept of time passage in the way that relates to the most fundamental concept of time through nature objects.
+> For user convenience, I added a mouse interction so if the user hold their left mouse button, it will speed up the entire time elapsing rate to show the concept of time passage in the way that relates to the most fundamental concept of time through nature objects.
