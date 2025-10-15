@@ -1,17 +1,13 @@
 # Assignment 3
 
-> - I chose to do a tree ring digital clock because it represents the passage of time through the increase of growth rings.
-> I think this is a great idea because it captures the idea of time but also has a lot of room for me to use my imagination.
-> Even though the tree ring digital clock does not show the exact time, it reveals the passage of time in years, months, days, and hours.
-> The growth rings here do not exactly follow natural rules as it will be a little abstract and creative. 
-> Each thin ring represents one month and each thicker year ring represents one year, meaning that each year will consist of 12 rings (1 thick ring and 11 thin rings).
->
-> - Each thin ring will be animated through setting the end point of arc dynamically responding to day passing.
-> Background color will also be changing dynamically based on the day-night cycle. 
-> Users can click and hold the mouse button to speed up the time to see the passage of time more clearly.
-> These animated and interactive features will be implemented in the next week's assignment as it directly contributes to the clock function.
-> This week I purely focused on the aesthetics and appearance of the abstract digital clock.
-> There are four year rings for this tree ring digital clock, meaning that a full animated cycle of time passage will be four years.
-> After each full cycle, the tree will change its shape by randomizing the width and height of itsrectangular barks and default tree rings back to 0 becuase it now becomes a new tree.
-> This feature will also be implemented next week as it relates to the clock function.
-> The tree ring digital clock sketch is uploaded in this section. It is a low-fi prototype as it only serves to create the base of my final project. There are some modifications added to it for the digital clock.
+> - This week I focused on finishing my tree ring abstract clock by aadding the ring animation and interactions to the original idea
+> Last week it was about the overall appearance of the clock, and this week is about giving the functionality to it so it can respond to time in an unconventional way
+> This clock starts at the current time based on month() and day(), meaning that it will adjust its growth ring number and length accordingly.
+> For example, if the current month is October and the current day is 15th of October, the clock will have 10 growth rings with another half completed ring at start.
+> Each ring will represent a month of time passage, and each full ring consists of 30 days, meaning that the ring will complete a full circle in 30 days
+> Because I wanted to show more clearly about the passage of time, I decided to just anchor the tree ring clock's initial time to the actual calendar time, and for the time passage after the initial time will be fully based on the speed I set for the clock
+> The color of the tree ring will change gradually within each full year, from a lightwood color to a darkwood color. I did this intentionally for a realistic tree ring surface because tree rings do get from a light to dark from based on seasonal factors and temperatures. Rings are light in Spring and dark in Winter
+> Also, the tree pith color will also change gradually based on customized time passage speed after initialliy anchored the time to the real calendar
+> Once the tree rings reach to their maximum amount, the tree barks will add another layer on top of itself. I did this to simulate the tree growth once every four year, despite I speed up this process by assigning the time passage rate to a customized speed
+> After every four years (4 year rings - 48 rings in total), the rings will default back to the calendar time and start again from there
+> For user convenience, I added a mouse interction so if the user hold their left mouse button, it will speed up the entire time elapsing rate to show the conccept of time passage in the way that relates to the most fundamental concept of time through nature objects

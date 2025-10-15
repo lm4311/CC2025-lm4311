@@ -34,10 +34,10 @@ let barkRectCount = 64; // set the number of rectangular bark pieces for easy ad
 // functional variables
 let ringColor; // declare to be used in mapColor() customized function
 let currentRing; // delcare to be used for tracking actively drawing arcs
-let ringRadiusContainer = []; // declare array to be used for containing all radius data for 48 rings
+let ringRadiusContainer = []; // declare array to be used for containing all radius data for 48 rings | https://idmp5.github.io/coding/arrays/
 let isYearRing = []; // declare array to to store boolean values for keeping track of year ring (every 12th ring)
 let currentAngle = 0; // declare to be used for accumulating arc span length that sums to two PI
-let currentAngleOffset = 0; // declare to be used for accumulating arc span length for the first imcompleted ring
+let currentAngleStart = 0; // declare to be used for accumulating arc span length for the first imcompleted ring
 let canLoop = false; //initialize the gate boolean to false 
 let doOnce = false; // initialize the Do Once boolean to false
 let mouseIsPressed = false; // initialize the mouse press boolean to false
@@ -129,6 +129,7 @@ function draw() {
   // also here I retrieved the boolean value that determines if each ring being display on canvas is year ring or not. Year ring would be every 12th growth ring
   // this isYearRing boolean list is pre-stored during setup() through arrangeRingLayout(). Now I can just pass on the current month to its parameter to decide the year ring
   // if it is not a year ring, it will have a thin stroke width and vice versa
+  // for each ring's radius I just extract the corresponding ring radius from the pre-computed array by passing on the "m" month variable to the array parameter
   // I also used my customized function mapColor() here to make each ring lerp from light wood color to dark wood color. So I just need to pass on the current month for it to decide which color it should use
   for (let m = 0; m <= initialMonth; m++){
 
@@ -150,84 +151,125 @@ function draw() {
   // this section is for drawing the remaining part of the arc span that is not completed in the initial calendar setup
   // this is basically the animation of arc spanning itself until it is fully closed but for the incompleted ring, not for the rest of the rings to be drawn
   // this is why I did not use for loop for this one
-  let frameSeconds = deltaTime / 1000; // because draw() operates based on frame per second, there is consistency for the animation drawing speed if I just rely on draw() to update my current angle offset eveyr frame
+  // because draw() operates based on frame per second, there is inconsistency for the animation drawing speed if I just rely on draw() to update my current angle offset every frame
+  // to compensate that inconsistency due to frame rate, I chose to use this built-in variable called deltaTime and divide it by 1000 to get seconds since last frame | https://p5js.org/reference/p5/deltaTime/
+  // so now if the frame rate fluctuates, the faster frame rate will yield a lower seconds per frame that reduces the spanning distance for that particular second, and vice versa
+  // now no matter what the frame rate is for each PC, it will take the same time for a ring to span from 0 to 2PI
+  let frameSeconds = deltaTime / 1000; 
   let speeds;
   if (mouseIsPressed) {
     speeds = 25;
   } else {
     speeds = 2.5;
   }
-  currentAngleOffset += speeds * frameSeconds;
-  console.log(deltaTime);
-
-  let secondsProgressPerMinuteOffset = initialMonthProgress * TWO_PI + currentAngleOffset;
-  if (secondsProgressPerMinuteOffset <= TWO_PI) {
-    arc(0, 0, ringRadiusContainer[initialMonth] * 2, ringRadiusContainer[initialMonth] * 2, initialMonthProgress * TWO_PI, secondsProgressPerMinuteOffset); 
+  currentAngleStart += speeds * frameSeconds; // this variable keeps increasing by (speeds * frameSeconds) each frame for the ring to animate itself
+  // here I try to animate the arc ring starting from the point where the incompleted ring is left off, and then start animating the ring from there until it fully closed at 2PI. This is what currentAngleOffset is used for
+  // when the animated arc ring is fully closed, I then allow the rest of the drawing logics to perform, just by setting the gate boolean canLoop back to true
+  // if I don't do that, the current animated arc will be covered by a full ring that is pre-loaded on canvas by the for loop below, and the next animated ring drawn by for loop below will not begin at 0, since the currentAngle keeps accumulating itself while waiting for the previous animated arc ring to finish
+  let currentAngleOffset = initialMonthProgress * TWO_PI + currentAngleStart;
+  if (currentAngleOffset <= TWO_PI) {
+    arc(0, 0, ringRadiusContainer[initialMonth] * 2, ringRadiusContainer[initialMonth] * 2, initialMonthProgress * TWO_PI, currentAngleOffset); // I want the ring radius value for the inital month ring so I simply extract that value from the pre-computed ring radius container, all the radius are pre-assigned in the monthly order
   } else {
     canLoop = true;
   }
     
+  // the rest of the for loops are wrapped inside this if statement for gating purposes
   if (canLoop){
+    // I created this for loop to print all fully completed rings that have already been drawn out through the animation on the canvas, except for the rings that are already on the canvas that is based on the calendar time
+    // that's why this for loop starts at initial month, and always stop at the ring that is previously drawn
+    // whenever the actively drawing ring finishes its animation, the currentRing will be incremented by one, so it keeps printing the ones that have already been drawn on the canvas
+    // without this for loop, the rings will not stay on the canvas since they will disappear as soon as it finishes its animation
     for (let i = initialMonth; i < currentRing; i++) {
+      // similar to the mapColor() I used in the for loop at the start, this assigns a color to each ring that stays on canvas, and this should be matching with the currently drawing arc rings executed in the later for loop
+      // I also used a modulo operator here so that there will never be a value larger than 11 getting passed onto mapColor() function because the alpha should not be higher than 1 and should return to 0 after each year cycle
       mapColor(i % (monthsPerYear));
+      // same logic here for checking year ring and extracting ring radius
       if (isYearRing[i]) {
         strokeWeight(thickStrokeWidth); 
-        arc(0, 0, ringRadiusContainer[i] * 2, ringRadiusContainer[i] * 2, 0, TWO_PI);
+        arc(0, 0, ringRadiusContainer[i] * 2, ringRadiusContainer[i] * 2, 0, TWO_PI); // a completed ring spans across 0 and 2PI
       } else {
         strokeWeight(thinStrokeWidth); 
         arc(0, 0, ringRadiusContainer[i] * 2, ringRadiusContainer[i] * 2, 0, TWO_PI);
       }
     }  
 
+    // this has the same logic as the currentAngleStart except this is the animation controller specifically for the rings generated after the initial setup
+    // I chose to do two different controller variable is because I don't want the ring animations generated after the initial setup mess up with animation from the inital setup rings, due to the conditional statement limitation inside draw()
     currentAngle += speeds * frameSeconds;
-      
+    
+    // this section is for drawing tree rings over and over again until it hits the maximum count, which is the length of the ring radius container array. So basically this part is for animating the rings after the initial setup part
     if (currentRing < ringRadiusContainer.length) {
+      // mapColor logic is still the same by using the modulo operator
       mapColor(currentRing % (monthsPerYear));
+      // same logic applies to how year ring is detected and drawn on the canvas with a thicker stroke
       if (isYearRing[currentRing]) {
         strokeWeight(thickStrokeWidth); 
+        // same logic for extracting ring radius based on the current executing animated ring
+        // same logic for animation driver variable currentAngle
         arc(0, 0, ringRadiusContainer[currentRing] * 2, ringRadiusContainer[currentRing] * 2, 0, currentAngle);
       } else {
         strokeWeight(thinStrokeWidth); 
         arc(0, 0, ringRadiusContainer[currentRing] * 2, ringRadiusContainer[currentRing] * 2, 0, currentAngle);
       }
     } else {
+      // here I want some defaulting logic once the amount of rings hits the maximum
+      // also I want to add an additional overlay of rectangle barks to the current layer to simulate the growth of tree from the outer appearance. This can also show the passage of time
+      // the default time will always be the lastest updated month and day because the initial setup rings are anchored to the calendar time. month() and day() updates every frame in draw()
       displayRectangleBarks();
-      currentRing = month() + 1;
-      currentAngleOffset = 0;
-      canLoop = false;
+      currentRing = month() + 1; // set the current ring back to its default
+      currentAngleStart = 0; // set the animation controller for the initial setup rings to 0
+      canLoop = false; // set the gating boolean back to false. This is very important as I want the later ring drawing executions wait until the rings in the initial setup finish theirs first
     }
 
+    // this section is for keeping track of the arc drawing animation to ensure once it hits the full span, the current angle will reset to 0, starting from the beginning for the next drawing animation for rings
     if (currentAngle >= TWO_PI) {
-      currentAngle = 0;
-      currentRing++;
-      console.log(currentRing);
+      currentAngle = 0; // reset the span end point to zero
+      currentRing++; // draw for the next ring
     }
   }
+  // I want to initialize the rectangle barks at the start so it will appear on the canvas, but the problem is it will keep adding layers and layers of randomized rectangle barks due to infinite calls from draw()
+  // so I decided to use a gate boolean to just make it execute once at the start
+  // Once it is executed once, the gate boolean will be set to true so it won't execute ever again
   if (!doOnce) {
     displayRectangleBarks();
+    doOnce = true;
   }
 }
 
+// I decided to customize a function for arranging all ring radius into one array and the year ring checker in another array
+// I arranged them all in monthly order so it won't give me headache if anything goes wrong and I need to trace back to the problem
+// Now all the data for ring radius and year ring are in one place, which made my life way easier. It drove me crazy before trying to debug which ring radius goes wrong
 function arrangeRingLayout() {
 
+  // the core idea of using two for loops to calculate radius for each ring and check for year ring did not change from the last week's in progress assignment
+  // Since I need to animate the rings one by one, it it much better to do it this way 
+  // the first for loop is to keep track of the year ring, making my life easier for managing these many rings even though I could do these in one for loop, but I chose not to becuase it can get quite overwhelming when the number of rings increase and hard to debug
   for (let y = 0; y < years; y++) {
+    // I created this variable becuase I wanted to store and update the year ring radius every time the year increases by 1. Think of it as levels in game, when you reach to a new level, everything you will be getting is based on that level and keep getting accumulated from there
+    // so this variable consists of the pith radius, y number of year ring gap, and 12y number of month ring gap
     let yearStartRadius = pithRadius + y * yearRingGap + monthsPerYear * y * monthRingGap;
-
+    // the second for loop as expected will be responsible for the 12 month ring tracking each year (11 thin rings + 1 thick ring)
     for (let m = 0; m < monthsPerYear; m++) {
-      let ringRadius = yearStartRadius + m * monthRingGap;
-      ringRadiusContainer.push(ringRadius);
-      isYearRing.push(m === monthsPerYear - 1); 
+      let ringRadius = yearStartRadius + m * monthRingGap; // I created this variable to store the final value for each month rings. The final radius for each ring consists of a current year ring radius and m number of month ring gap
+      ringRadiusContainer.push(ringRadius); // adds the corresponding ring radius to the container | https://idmp5.github.io/coding/arrays/
+      isYearRing.push(m === monthsPerYear - 1); // returns a boolean value to the array for year ring. It will only returns true when the current month is the last month of each full year cycle
     }
   }
 }
-
+// same reason for creating this customized function as above. It is much easier to debug and reuse when multiple similar logics are in the same place
+// this function is responsible for assigning colors to the tree ring
+// tree rings will have different colors within each full year cycle, from the light wood to dark wood
+// this function takes in current month as the parameter and uses the current month to get divided by 11 because the month tracking begins at 0 and ends at 11
 function mapColor(currentMonth) {
   alpha = currentMonth / (monthsPerYear - 1); 
-  ringColor = lerpColor(lightWood, darkWood, alpha);
+  // once we have the alpha which controls the interpolation of color, the ring color will get deeper each time when going to the next ring since alpha is increasing
+  ringColor = lerpColor(lightWood, darkWood, alpha); // https://p5js.org/reference/p5/lerpColor/
   stroke(ringColor);
   noFill();
 }
 
+// I created this customized function for the same reason for reusability as it contains a bunch of code that is just for adding random rectangle barks to the canvas
+// exact same logic from my last week's in-progress assingment
 function displayRectangleBarks() {
   // -- tree rectangular barks 
   // this section creates all the rectangular barks on the edge of the entire tree. I will be using for loop and random() to generate natural patterns for it
@@ -241,7 +283,7 @@ function displayRectangleBarks() {
   // in this for loop, I loop through all 64 rectangular barks and slightly offset each of them to create this result, where all 64 rectangles circle around the tree bark
   for (j = 0; j < barkRectCount; j++) {
     // to create this circular placement of rectangles, I used the rotation offset for each rectangle. Because there are 64 of them, each of them will take 1/64 of the 2PI for placement, so that they can evenly space out
-    let rotationOffset = (j / barkRectCount) * 2 * PI;
+    let rotationOffset = (j / barkRectCount) * TWO_PI;
     // now the rectangles are perfectly evenly spaced out around the tree bark, but it is not organic. So I decided to add some randomness to their width and height
     let randomDepth = random(25, 50); // set a random number between 25 and 50 for rectangle height (depth) | https://p5js.org/reference/p5/random/
     let randomWidth = random(30, 60); // set a random number between 30 and 60 for rectangle width. Now they look pretty organic and real
@@ -254,14 +296,19 @@ function displayRectangleBarks() {
     // because there is already a translation of centerX and centerY so we don't need any translation here
     rect(outerRadius, 0, randomWidth, randomDepth);
     pop();       
-    doOnce = true;
   }
 }
 
+// I decided to implement mousePressed function is because I want the users to be able to interact with the canvas and accelerate time elapse just by holding down the left mouse button
+// I created the mouseIsPressed variable to notify canvas whether the user is holding their left mouse button. Basically this variable will act as a gating boolean and be used with if statement during executions
+// https://p5js.org/reference/p5/mousePressed/
 function mousePressed() {
   mouseIsPressed = true;
 }
 
+// same reasons for implementing mouseReleased function. Since I have users pressing down their mouse button, I also want to know when the users release it, in order to stop accelerating the time and return to normal speed
+// when users release their mouse button, this gating boolean will return to false and notifies the if statement to stop the acceleration
+// https://p5js.org/reference/p5/mouseReleased/
 function mouseReleased() {
   mouseIsPressed = false;
 }
