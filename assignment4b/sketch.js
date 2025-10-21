@@ -18,7 +18,6 @@
 // Another user-friendly design I made here is that I created this scale out-in effect for any pizza that is placed on the canvas for the first time to help users identify which pizza is the freshest (newest).
 // To ensure an organic pattern of pizzas, I used many random() in my pizza functions to simulate different sizes, types, positions, and topping amount.
 
-
 // declare global variables
 let myPizzas = []; // this array contains all the pizzas that will be drawn on the canvas
 let pizzaType; // this variable contains string value for pizza type
@@ -48,7 +47,6 @@ let tempPineappleCount = 0;
 let randomType = false; // initialize randomType boolean to false. Users do not start with random pizza selection
 let isAutoGenerate = true; // initialize isAutoGenerate boolean to true. Canvas starts by automatically generating pizzas
 let lastSpawn = 0; // initialize the spawnTime for automatic generator to 0
-
 
 function setup() {
   createCanvas(1200, 1200);
