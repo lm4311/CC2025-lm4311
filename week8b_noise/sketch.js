@@ -15,7 +15,7 @@ function setup() {
   colorMode(HSB);
 
   eye1 = new EyeBall(200,200,100,150);
-  eye2 = new EyeBall(200,200,100,150);
+  eye2 = new EyeBall(300,200,100,150);
 }
 
 function draw() {
