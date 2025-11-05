@@ -1,4 +1,4 @@
-// I chose to do a spider with its spide web increase and decrease in the vertical space using noise. I think this is a great idea since the noise function really looks well for lines
+// I chose to do a spider that can increase and decrease its web string vertically using noise. I think this is a great idea since the noise function really looks well for lines
 function setup() {
   createCanvas(400, 400);
   noStroke();

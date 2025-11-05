@@ -1,4 +1,4 @@
-// I created this ghosts marching effect for in a horizontal pattern
+// I created this ghosts marching effect in a horizontal pattern
 let luke2GhostCount = 6;
 let luke2GhostX = []; // container for the ghost x coordinate
 let luke2GhostY = []; // container for the ghost y coordinate

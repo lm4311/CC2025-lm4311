@@ -1,4 +1,4 @@
-// I wanted create Halloween theme patterns for this assignment. The first one I chose to do is the bats swirling around the center, which is the moon and its subtle glow
+// I wanted to create Halloween theme patterns for this assignment. The first one I chose to do is the bats swirling around the center, which is the moon and its subtle glow
 
 let luke1Time = 0;
 let luke1BatCount = 9;
