@@ -28,7 +28,7 @@ function draw() {
   let luke3TargetY = luke3TopY + luke3CurrentLength;
 
   // move spider and spider string to the middle
-  translate(width / 2, 0);
+  translate(width/2, 0);
 
   // draw the spider web string using the TopY and the Target Y to make it animated
   stroke(220, 220, 230);
