@@ -1,7 +1,7 @@
 // I wanted to create Halloween theme patterns for this assignment. The first one I chose to do is the bats swirling around the center, which is the moon and its subtle glow
 
-let luke1Time = 0;
-let luke1BatCount = 9;
+let luke1Time = 0; // initialize the accumulative time to 0
+let luke1BatCount = 9; // initialize the total number of bats
 
 function setup() {
   createCanvas(400, 400);
@@ -12,20 +12,20 @@ function draw() {
   // setting up the background and bat flying trails
   background(0, 0, 0, 35);
 
-  // Move all objects to the center
+  // move all objects to the center
   translate(width/2, height/2);
 
-    // Moon shape
+  // moon
   fill(240, 230, 180);
   ellipse(0, 0, 200, 200);
 
-  // Outer ring glow
+  // outer ring glow
   fill('rgba(240, 230, 180, 0.2)');
   // I used the noise() function over here to create random patterns without causing flickers. It gives a buttersmooth feel of subtle glowing.
   // I used the map() function to restrict the radius of the glow of the moon
   ellipse(0, 0, map(noise(luke1Time), 0, 1, 250, 300), map(noise(luke1Time), 0, 1, 250, 300));
 
-  // I used the for loop over here to generate multiple copies of bats with different angles of self-rotation as well as the rotation around the moon center
+  // I used the for loop over here to mainly generate multiple copies of bats with different angles of self-rotation as well as the rotation around the moon center
   for (let i = 0; i < luke1BatCount; i++) {
     // I created this angle variable to store variations of angles of bat spinning itself based on 'i' and the customized time 'luke1Time'
     let luke1Angle = luke1Time * (0.8 + i * 0.03) + i;
