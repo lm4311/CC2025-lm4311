@@ -1,4 +1,4 @@
-// I chose to do a spider with its spide web increase and decrease in the vertical space using noise. I think this is a great idea since the noise function really looks well for lines
+// I chose to do a spider that can increase and decrease its web string vertically using noise. I think this is a great idea since the noise function really looks well for lines in a dynamic way
 function setup() {
   createCanvas(400, 400);
   noStroke();
@@ -28,19 +28,19 @@ function draw() {
   let luke3TargetY = luke3TopY + luke3CurrentLength;
 
   // move spider and spider string to the middle
-  translate(width / 2, 0);
+  translate(width/2, 0);
 
   // draw the spider web string using the TopY and the Target Y to make it animated
   stroke(220, 220, 230);
   line(0, luke3TopY, 0, luke3TargetY);
   noStroke();
 
-  // draw the spier body using two stacked ellipses
+  // draw the spider body using two stacked ellipses
   fill(30);
   ellipse(0, luke3TargetY, 28, 22); // need to set the y value to target Y so it is moving along with the string
   ellipse(0, luke3TargetY - 10, 18, 14); // need to set the y value to target Y so it is moving along with the string
 
-  // draw the spier legs using four lines with two lines on each side
+  // draw the spider legs using four lines with two lines on each side
   // same logic applies here for the y coordinate to set it to target Y so they move along with the web string
   stroke(30);
   line(-18, luke3TargetY - 2, -30, luke3TargetY - 8);
