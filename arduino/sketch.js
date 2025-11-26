@@ -29,6 +29,9 @@ function draw() {
   if (str.length > 0) {
     sensorValue = str;
   }
+
+  text("sensorValue: " + sensorValue, 10, 50);
+
   let circleD = map(sensorValue,0,4095,0,width);
   circle(width/2,height/2,circleD);
 
