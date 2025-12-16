@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../ml5-hand-pose"
+		},
+		{
+			"path": "../ml5-pose-bubble"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "final-with-handpose"
+	}
+}
