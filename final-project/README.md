@@ -1,61 +1,99 @@
-# template
+# A top-down driving game built with p5.js, p5.sound, and ml5.js HandPose, featuring a modular class-based architecture and optional gesture-based input via webcam.
 
----
+## Resource Library
+- p5.js — rendering & game loop
+- p5.sound — music & sound effects
+- ml5.js HandPose — real-time hand tracking
+- JavaScript — class-based game architecture
 
-This is a README file that can be used to describe and document your assignment.
+## Architecture Overview
 
-Markdown Cheatsheet (from [https://www.markdownguide.org/cheat-sheet/](https://www.markdownguide.org/cheat-sheet/)):
+The game is structured using object-oriented design. Each gameplay element is encapsulated in its own class, enabling clear separation of concerns and easy extensibility.
 
----
+### Core Classes
 
-# Heading1
-## Heading2
-### Heading3
-#### Heading4
-##### Heading5
-###### Heading6
+#### Road
+- Manages vertical scrolling, lane positions, and road boundaries
+- Generates and recycles lane stripes and center road blocks
+- Provides lane helper methods (e.g. getLaneCenter())
+- Acts as the spatial reference for all moving objects
 
-**bold text**
+#### Car
+- Player-controlled vehicle
+- Supports keyboard and gesture-based input
+- Horizontal movement constrained to road bounds
+- Uses lerp-based smoothing for gesture input
+- Implements collision radius and vertical checkpoints
 
-*italicized text*
+#### Item
+- Unified class for all interactable objects
+- Differentiated by kind:
+  - charge — restores energy
+  - garbage — activates bonus mode
+  - rock — obstacle (game over)
+- Handles vertical movement and collision logic
 
-~~strikethrough text~~
+#### SceneryBuilding / SceneryTree
+- Decorative side elements (non-collidable)
+- Spawn outside road bounds
+- Move at half road speed for parallax depth
+- Recycled when offscreen using random regeneration helpers
 
-Ordered List:
-1. First item
-2. Second item
-3. Third item
+## Gameplay Systems
 
-Unordered List:
-- First item
-- Second item
-- Third item
+### Spawning System
+- Centralized spawnItems() helper
+- Frame-based probability checks
+- Lane-aware placement to avoid unfair spawns
+- Weighted randomness for balancing risk and reward
 
-`short code block`
+### Collision System
+- Radial distance checks for item collisions
+- Combined horizontal overlap + vertical sampling for road blocks
+- Collision effects handled based on item type
 
-```
-extended code block
-fun() {
-  return 0
-}
-```
+### Energy, Score & Bonus
+- Energy drains over time (frame-rate independent)
+- Score increases based on survival time
+- Bonus mode:
+  - Temporary score multiplier
+  - Increased road speed
+  - Timer-based duration
 
-Link:  
-[linked text](https://www.example.com)
+## Input System
 
+### Keyboard Input
+- A/D or Arrow keys for horizontal movement
 
-Image with url:  
-![image description](https://dm-gy-6063-2024f-b.github.io/assets/homework/02/clark-espaco-modulado-00.jpg)
+### Gesture Input (HandPose)
+- Index finger X-position mapped to car movement
+- Camera mirroring compensated
+- Lerp smoothing to reduce jitter
+- Calibration logic on hand re-detection
+- Pinch gesture abstracted via isPinching() helper (UI use)
 
+## UI & Game State
 
-Image on repo:  
-![image description](./file-name.jpg)
+Game flow controlled via simple finite states:
+- mainMenu
+- howToPlay
+- gameOver
 
+UI rendering separated into helpers:
+- drawUI()
+- drawMainMenu()
+- drawHowToPlay()
+- drawGameOver()
 
-To start a new line, add two spaces at the end of a line, like this:  
-this is a new line.
+## Audio System
+- Looping background music with execution gating
+- Categorized sound effects for gameplay and UI
+- One-shot triggers prevent overlap during state changes
 
+## Key Technical Features
+- Class-based, modular architecture
+- Procedural generation with object recycling
+- Dual-input control system (keyboard + gesture)
+- Frame-rate–independent gameplay logic
+- Clear separation of logic, rendering, input, and UI
 
-To start a new paragraph, leave an empty line between two lines of text.
-
-This is a new paragraph.
