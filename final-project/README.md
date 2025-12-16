@@ -74,7 +74,7 @@ The game is structured using object-oriented design. Each gameplay element is en
 
 ## UI & Game State
 
-Game flow controlled via simple finite states:
+Game flow controlled via simple states:
 - mainMenu
 - howToPlay
 - gameOver
@@ -89,11 +89,4 @@ UI rendering separated into helpers:
 - Looping background music with execution gating
 - Categorized sound effects for gameplay and UI
 - One-shot triggers prevent overlap during state changes
-
-## Key Technical Features
-- Class-based, modular architecture
-- Procedural generation with object recycling
-- Dual-input control system (keyboard + gesture)
-- Frame-rate–independent gameplay logic
-- Clear separation of logic, rendering, input, and UI
 
