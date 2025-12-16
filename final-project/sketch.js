@@ -31,8 +31,8 @@ let roadSpeed = 10; // this sets the y-movement speed of the road stripes and bl
 let myBGM; // stores the background music
 let mySFX = []; // stores all gameplay sound effects 
 let mySFXUI = []; // stores all UI sound effects
-let sfxFiles = ['battery charge.mp3', 'bonus.mp3', 'nitro boost.mp3', 'car crash.mp3', 'game over.mp3']; // stores the path to gameplay SFX files
-let sfxFilesUI = ['selection.mp3', 'confirm selection.mp3', 'game start.mp3']; // stores the path to UI SFX files
+let sfxFiles = ['final-project/battery charge.mp3', 'final-project/bonus.mp3', 'final-project/nitro boost.mp3', 'final-project/car crash.mp3', 'final-project/game over.mp3']; // stores the path to gameplay SFX files
+let sfxFilesUI = ['final-project/selection.mp3', 'final-project/confirm selection.mp3', 'final-project/game start.mp3']; // stores the path to UI SFX files
 let menuIndex = 0; // this variable determines which menu option the player is currently selecting. 0 represents 'start game' and 1 represents 'How to Play'
 let menuItems = ["Start Game", "How to Play"]; // stores all menu option names
 
@@ -50,7 +50,7 @@ let startFingerX = 0; // initialize index finger tip X-postion so that it won't 
 // I used the p5.js sound library. They require to load sound in the preload() function
 function preload() {
   // load the background music
-  myBGM = loadSound('BGM.mp3');
+  myBGM = loadSound('final-project/BGM.mp3');
   // load all gameplay sound effects from their corresponding file paths
   for (let i = 0; i < sfxFiles.length; i++) {
     mySFX[i] = loadSound(sfxFiles[i]);
@@ -82,7 +82,17 @@ function setup() {
     trees.push(randomTree());
   }
 
-
+  // ml5 hand pose
+  // load the handPose model
+  handPose = ml5.handPose();
+  // create the capture video that uses the webcam for detecting hands
+  video = createCapture(VIDEO);
+  // set the video size to 640 by 480
+  video.size(640, 480);
+  // hide the video so that the screen only shows the game but not the capture video
+  video.hide();
+  // start detecting hands from the webcam video
+  handPose.detectStart(video, gotHands);
   
 }
 
