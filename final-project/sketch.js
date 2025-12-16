@@ -82,17 +82,7 @@ function setup() {
     trees.push(randomTree());
   }
 
-  // ml5 hand pose
-  // load the handPose model
-  handPose = ml5.handPose();
-  // create the capture video that uses the webcam for detecting hands
-  video = createCapture(VIDEO);
-  // set the video size to 640 by 480
-  video.size(640, 480);
-  // hide the video so that the screen only shows the game but not the capture video
-  video.hide();
-  // start detecting hands from the webcam video
-  handPose.detectStart(video, gotHands);
+
   
 }
 
