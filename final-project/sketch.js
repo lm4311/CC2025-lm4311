@@ -31,8 +31,8 @@ let roadSpeed = 10; // this sets the y-movement speed of the road stripes and bl
 let myBGM; // stores the background music
 let mySFX = []; // stores all gameplay sound effects 
 let mySFXUI = []; // stores all UI sound effects
-let sfxFiles = ['final-project/battery charge.mp3', 'final-project/bonus.mp3', 'final-project/nitro boost.mp3', 'final-project/car crash.mp3', 'final-project/game over.mp3']; // stores the path to gameplay SFX files
-let sfxFilesUI = ['final-project/selection.mp3', 'final-project/confirm selection.mp3', 'final-project/game start.mp3']; // stores the path to UI SFX files
+let sfxFiles = ['final-project/battery-charge.mp3', 'final-project/bonus.mp3', 'final-project/nitro-boost.mp3', 'final-project/car-crash.mp3', 'final-project/game-over.mp3']; // stores the path to gameplay SFX files
+let sfxFilesUI = ['final-project/selection.mp3', 'final-project/confirm-selection.mp3', 'final-project/game-start.mp3']; // stores the path to UI SFX files
 let menuIndex = 0; // this variable determines which menu option the player is currently selecting. 0 represents 'start game' and 1 represents 'How to Play'
 let menuItems = ["Start Game", "How to Play"]; // stores all menu option names
 
