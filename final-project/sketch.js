@@ -50,7 +50,7 @@ let startFingerX = 0; // initialize index finger tip X-postion so that it won't 
 // I used the p5.js sound library. They require to load sound in the preload() function
 function preload() {
   // load the background music
-  myBGM = loadSound('final-project/BGM.mp3');
+  myBGM = loadSound('BGM.mp3');
   // load all gameplay sound effects from their corresponding file paths
   for (let i = 0; i < sfxFiles.length; i++) {
     mySFX[i] = loadSound(sfxFiles[i]);
